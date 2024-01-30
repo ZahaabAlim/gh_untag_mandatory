@@ -1,0 +1,6 @@
+Resource Name,Region
+lambda_trigger,ap-south-1
+FactorialFunc,ap-south-1
+list_students,us-east-1
+HelloWorldFunc,us-east-1
+students,us-west-2
