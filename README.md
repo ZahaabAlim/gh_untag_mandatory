@@ -1,77 +1,46 @@
-## AWS Resource Monitoring and Reporting Automation
+Sure! Here's an explanation of the project and how to use it:
 
-## Overview
+---
 
-This project automates the monitoring and reporting of AWS resources (S3 buckets, Lambda functions, and DynamoDB tables) to ensure they have the required tags. It uses Terraform to set up the necessary infrastructure and AWS Lambda functions to generate and publish CSV reports. Additionally, a GitHub Actions workflow is included to automate the execution of the script and upload the reports.
+# Checking of Untagged Resources
 
-## Project Components
+This project is designed to help you identify AWS resources (S3 buckets, Lambda functions, and DynamoDB tables) that are missing mandatory tags. It uses a Python script to scan your AWS environment and generate reports, which are then uploaded as artifacts using GitHub Actions.
 
-### Terraform Configuration
+## Features
 
-The Terraform configuration sets up the following AWS resources:
+- **Automated Identification**: The script automatically identifies AWS resources that do not have the specified mandatory tags.
+- **Report Generation**: It generates CSV reports for each type of resource (S3, Lambda, and DynamoDB) that are missing the mandatory tags.
+- **Continuous Monitoring**: The GitHub Actions workflow ensures that the check is performed every time there is a push to the repository, providing continuous monitoring.
 
-- **SNS Topic**: For publishing messages.
-- **SQS Queues**: For storing messages for Lambda functions.
-- **IAM Roles and Policies**: For granting necessary permissions to Lambda functions.
-- **Lambda Functions**: For scraping EC2 and Cost Explorer data and generating reports.
-- **EventBridge Rule**: For scheduling the Lambda functions.
+## How to Use
 
-### Lambda Functions
+### Setup
 
-1. **Cost Explorer Scraper Lambda**:
-   - Queries AWS Cost Explorer for cost and usage data.
-   - Generates a CSV report and publishes it to an SNS topic.
+1. **Clone the Repository**: Start by cloning the repository to your local machine.
 
-2. **EC2 Scraper Lambda**:
-   - Retrieves EC2 instance data from all regions.
-   - Generates a CSV report and publishes it to an SNS topic.
+2. **Install Dependencies**: Install the necessary Python dependencies using pip.
 
-3. **Untagged Resources Checker**:
-   - Checks S3 buckets, Lambda functions, and DynamoDB tables for missing mandatory tags.
-   - Generates CSV reports listing untagged resources.
+3. **Configure AWS Credentials**: Ensure your AWS credentials are configured properly. You can do this using the AWS CLI.
 
-### GitHub Actions Workflow
+### Running the Script Locally
 
-The GitHub Actions workflow automates the execution of the untagged resources checker script and uploads the generated reports as artifacts.
+1. **Execute the Script**: Run the Python script to check for untagged resources in your AWS environment.
+2. **Review Reports**: The script will generate CSV reports for S3, Lambda, and DynamoDB resources that are missing the mandatory tags. These reports will be saved in the repository directory.
 
-## Setup Instructions
+### Using GitHub Actions
 
-### Prerequisites
+1. **Push to Repository**: The GitHub Actions workflow is triggered on every push to the repository.
+2. **Automated Steps**: The workflow will:
+   - Checkout the repository
+   - Set up Python
+   - Install dependencies
+   - Configure AWS credentials
+   - Run the script
+   - Upload the generated reports as artifacts
 
-- AWS account with necessary permissions.
-- Terraform installed.
-- Python 3.10 installed.
-- GitHub repository with secrets for AWS credentials.
-
-### Terraform Setup
-
-1. Clone the repository.
-2. Navigate to the Terraform directory.
-3. Initialize Terraform:
-   ```sh
-   terraform init
-   ```
-4. Apply the Terraform configuration:
-   ```sh
-   terraform apply
-   ```
-
-### Lambda Functions Deployment
-
-1. Ensure the Lambda function code (`ec2_scraper.py`, `cost_explorer_scrapper.py`, `untag.py`) is in the repository.
-2. Terraform will automatically package and deploy the Lambda functions.
-
-### GitHub Actions Workflow
-
-1. Add AWS credentials to the GitHub repository secrets (`AWS_ACCESS_KEY`, `AWS_SECRET_ACCESS_KEY`).
-2. The workflow will run on every push to the repository, executing the untagged resources checker script and uploading the reports.
-
-## Usage
-
-- The Lambda functions will run as scheduled by the EventBridge rule and generate reports.
-- The GitHub Actions workflow will check for untagged resources and upload reports on every push.
+3. **Access Reports**: After the workflow runs, you can download the reports from the GitHub Actions artifacts section.
 
 ## Contributing
 
-Feel free to open issues or submit pull requests if you have any improvements or bug fixes.
+Contributions are welcome! If you have any improvements or bug fixes, please open an issue or submit a pull request.
 
