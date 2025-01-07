@@ -37,6 +37,15 @@ This project is designed to help you identify AWS resources (S3 buckets, Lambda 
 
 3. **Access Reports**: After the workflow runs, you can download the reports from the GitHub Actions artifacts section.
 
+ ## Working of the Lambda Script
+The Lambda script is part of the overall Python script that checks for untagged resources. Here’s how it works:
+
+Initialize the Lambda Client: The script initializes a Boto3 client for AWS Lambda in the specified region.
+List Lambda Functions: It retrieves a list of all Lambda functions in the region.
+Check Tags: For each Lambda function, the script retrieves the tags associated with the function. It checks if the mandatory tags are present.
+Identify Untagged Resources: If the mandatory tags are missing, the function name and region are added to the list of untagged resources.
+Generate Report: The script generates a CSV report listing all Lambda functions that are missing the mandatory tags.
+
 ## Contributing
 
 Contributions are welcome! If you have any improvements or bug fixes, please open an issue or submit a pull request.
