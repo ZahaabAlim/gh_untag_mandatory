@@ -1,6 +1,3 @@
-Sure! Here's an explanation of the project and how to use it:
-
----
 
 # Checking of Untagged Resources
 
