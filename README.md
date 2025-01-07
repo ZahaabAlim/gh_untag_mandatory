@@ -1,4 +1,4 @@
- AWS Resource Monitoring and Reporting Automation
+## AWS Resource Monitoring and Reporting Automation
 
 ## Overview
 
